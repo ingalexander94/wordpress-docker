@@ -30,12 +30,14 @@ services:
     depends_on:
       - mariadb
   nginx:
-    image: nginx:1.25.0-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./wordpress:/var/www/html
     ports:
-      - 4263:80
+      - 80:80
     links:
       - wordpress
       - phpmyadmin
